@@ -1,5 +1,5 @@
 <html form=desktop>
-<title>Dynamic Custom Media Queries, in ~139 characters of js</title>
+<title>Dynamic Custom Media Queries, in ~139 bytes</title>
 <script>
     let dmq = [
     		[ 'short',   '(min-aspect-ratio: 4/3) and (max-height: 640px)' ]
@@ -12,7 +12,6 @@
     	const dynamicMediaMatch = ()=> document.documentElement.setAttribute( 
     		'form', found = dmq.find( a=> matchMedia(a[1]).matches )[0] 
     	);
-    
     
     	onload = onresize = dynamicMediaMatch;
 </script>
@@ -40,7 +39,7 @@
     		color: white;
     }
     
-    html, body, body * { display: block; width: 100%; height 100%; padding: 0; margin: 0; overflow: hidden; }
+    html, body, body * {  padding: 0; margin: 0; overflow: hidden; }
     
     html {
     	&:after {
@@ -58,7 +57,7 @@
     	top: 0; left: 0;
     	background: rgba(255,255,255,.88);
     	
-    	a {
+    	p {
     				padding: 18px; 
     				
     	}
@@ -90,7 +89,7 @@
     [form="short"],
     [form="reader"]
     {
-    		a {
+    		p {
     			position: absolute;
     			writing-mode: vertical-rl;
     			transform: scale(-1,-1);
@@ -115,7 +114,7 @@
     				padding-left: 120px;
     			}
     		
-    			a {
+    			p {
     				bottom: 0; 
     			}
     			
@@ -175,4 +174,4 @@
 </style>
 
 <section></section>
-<Nav><a href=https://medium.com/@kevinawang_87130/dynamic-media-queries-today-f9c26d018956>0 Dependencies, ~139 chars, HOW?!</a></Nav>
+<Nav><p><b>Dynamic Media Queries</b> Play with resizing this window, then view source/<wbr><a href=https://medium.com/@kevinawang_87130/dynamic-media-queries-today-f9c26d018956>read how it's done.</a></p></Nav>
