@@ -1,45 +1,178 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<!-- <link rel="icon" href="./favicon.png" /> -->
-		
-		<style>* {margin:0;padding:0;box-sizing: border-box;}</style>
+<html form=desktop>
+<title>Dynamic Custom Media Queries, in ~139 characters of js</title>
+<script>
+    let dmq = [
+    		[ 'short',   '(min-aspect-ratio: 4/3) and (max-height: 640px)' ]
+    	, [ 'giant',   '(min-width: 3350px)' ]
+    	, [ 'mobile',  '(max-width: 835px)' ]
+    	, [ 'reader',  '(max-aspect-ratio: 1) and (max-height:1920px)']
+    	, [ 'desktop', 'screen' ] 
+    	];
+    
+    	const dynamicMediaMatch = ()=> document.documentElement.setAttribute( 
+    		'form', found = dmq.find( a=> matchMedia(a[1]).matches )[0] 
+    	);
+    
+    
+    	onload = onresize = dynamicMediaMatch;
+</script>
 
-		<script>
-			let global = {};
-		</script>
-		
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		
-		<link rel="modulepreload" href="./_app/immutable/entry/start.BzfTjjfY.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/CEQAfKyR.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/GjaxKlU4.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/_u7wdTLS.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/app.CE4nWcIT.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/CMkyyaqg.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/bKOFs-99.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/DTAkcPDF.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/Cs5MyKa4.js">
-	</head>
-	<body data-sveltekit-preload-data="hover">
-		<div style="display: contents">
-			<script>
-				{
-					__sveltekit_nopxay = {
-						base: new URL(".", location).pathname.slice(0, -1)
-					};
+<style>
+    :root {
+    	--biggap: 120px;
+    	--lilgap: 33px;
+    }
+    
+    html {
+    			font-size: 16px;
+    			transition: background 2s;
+    			font-family: monospace;
+    			background: grey;
+    			overflow: hidden;
+    }
+    
+    html:after {
+    		content: 'This demo requires nesting CSS.'
+    		font-size: 16px;
+    		position: fixed;
+    		top: var(--biggap);
+    		left: var(--lilgap);
+    		color: white;
+    }
+    
+    html, body, body * { display: block; width: 100%; height 100%; padding: 0; margin: 0; overflow: hidden; }
+    
+    html {
+    	&:after {
+    		content: attr(form) ' ';
+    		font-size: 80px;
+    		position: fixed;
+    		top: var(--biggap);
+    		left: var(--lilgap);
+    		color: black;
+    	}
+    }
+    
+    nav {
+    	position: fixed;
+    	top: 0; left: 0;
+    	background: rgba(255,255,255,.88);
+    	
+    	a {
+    				padding: 18px; 
+    				
+    	}
+    }
+    
+    section {
+    	width: 100%;
+    	height: 100%;
+    	position: absolute;
+    	padding: 61px;
+    	overflow: visible;
+    }
+    
+    [form="desktop"]
+    {	background: lightBlue;
+    
+    			nav {
+    				right: 0;
+    				height: 80px;
+    				width: 100vw;
+    			}
+    			
+    			section {
+    				padding-top: 120px;
+    			}
+    }
+    
+    
+    [form="short"],
+    [form="reader"]
+    {
+    		a {
+    			position: absolute;
+    			writing-mode: vertical-rl;
+    			transform: scale(-1,-1);
+    		}
+    }
+    
+    [form="short"]
+    {	background: pink;
+    
+    			&:after {
+    				top: var(--lilgap);
+    				left: var(--biggap);
+    			}
+    
+    			nav {
+    				bottom: 0;
+    				width: 80px;
+    				height: 100vh;
+    			}
+    			
+    			section {
+    				padding-left: 120px;
+    			}
+    		
+    			a {
+    				bottom: 0; 
+    			}
+    			
+    }
+    
+    [form="reader"]
+    {	background: wheat;
+    	
+    			&:after {
+    				top: var(--lilgap);
+    				left: var(--biggap);
+    			}
+    	
+    			nav {
+    				bottom: 0;
+    				width: 80px;
+    				height: 100vh;
+    			}
+    			
+    			section {
+    				padding-left: 120px;
+    			}
+    }
+    
+    [form="mobile"]
+    { background: lightGreen;
+    
+    			nav {
+    				right: 0;
+    				height: 80px;
+    				width: 100vw;
+    			}
+    			
+    			section {
+    				padding: 120px 4.1vw 0;
+    			}
+    }
+    
+    [form="giant"]
+    { 		background: lavender;
+    
+    			&:after {
+    				top: var(--biggap);
+    				font-size: 240px;
+    			}
+    
+    			nav {
+    				right: 0;
+    				height: 80px;
+    			}
+    			
+    			section {
+    				padding-top: 240px;
+    				padding-left: 120px;
+    			}
+    }
+</style>
 
-					const element = document.currentScript.parentElement;
-
-					Promise.all([
-						import("./_app/immutable/entry/start.BzfTjjfY.js"),
-						import("./_app/immutable/entry/app.CE4nWcIT.js")
-					]).then(([kit, app]) => {
-						kit.start(app, element);
-					});
-				}
-			</script>
-		</div>
-	</body>
-</html>
+<section></section>
+<Nav><a href=https://medium.com/@kevinawang_87130/dynamic-media-queries-today-f9c26d018956>0 Dependencies, ~139 chars, HOW?!</a></Nav>
